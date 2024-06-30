@@ -3,6 +3,7 @@ const Property = require('../models/Property');
 const createProperty = async (req, res) => {
   const { title, place, area, bedrooms, bathrooms, nearby, price } = req.body;
 
+  //creating new property document to be saved into collection
   const property = new Property({
     title,
     place,
@@ -14,7 +15,7 @@ const createProperty = async (req, res) => {
     seller: req.user._id
   });
 
-  const createdProperty = await property.save();
+  const createdProperty = await property.save(); //saving it to the Property collection
   res.status(201).json(createdProperty);
 };
 
