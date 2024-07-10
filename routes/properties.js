@@ -24,6 +24,7 @@ router.route('/:id')
 .options( cors.corsWithOptions, (req,res)=>{res.statusCode=(200);})
 .put(cors.corsWithOptions, protect, updateProperty)
 .delete(cors.corsWithOptions, protect, deleteProperty);
+
 // Get seller details via property ID
 router.route('/:id/seller')
 .options( cors.corsWithOptions, (req,res)=>{res.statusCode=(200);})

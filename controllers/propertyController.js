@@ -20,8 +20,21 @@ const createProperty = async (req, res) => {
 };
 
 const getProperties = async (req, res) => {
-  const properties = await Property.find({});
-  res.json(properties);
+  const queryArea = req.query.searchArea;
+  console.log(queryArea);
+  let properties;
+  try {
+    if (queryArea) {
+      
+      const regex = new RegExp(queryArea, 'i'); // 'i' makes the search case-insensitive
+      properties = await Property.find({ place: regex });
+    } else {
+      properties = await Property.find({});
+    }
+    res.json(properties);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching properties', error });
+  }
 };
 
 const getUserProperties = async (req, res) => {
